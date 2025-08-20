@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Student Dashboard</title>
+</head>
+<body>
+    <h1>Welcome,</h1>
+    <p>Your email: {{ student.username }}</p>
+    <p>USN: {{ student.usn }}</p>
+    <p>Branch: {{ student.branch }}</p>
+    <p>Semester: {{ student.semester }}</p>
+
+    <h3>Your Marks:</h3>
+    {% if marks %}
+      <ul>
+        {% for mark in marks %}
+          <li>{{ mark.subject }}: {{ mark.marks }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No marks available.</p>
+    {% endif %}
+
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

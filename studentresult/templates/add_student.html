@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Student</title>
+</head>
+<body>
+    <h2>Add New Student</h2>
+    <form method="post">
+        <label>Username:</label><br>
+        <input type="text" name="username" required><br><br>
+
+        <label>Password:</label><br>
+        <input type="text" name="password" required><br><br>
+
+        <label>USN:</label><br>
+        <input type="text" name="usn" required><br><br>
+
+        <label>Branch:</label><br>
+        <input type="text" name="branch" required><br><br>
+
+        <label>Semester:</label><br>
+        <input type="number" name="semester" required><br><br>
+
+        <button type="submit">Add Student</button>
+    </form>
+    <br>
+    <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+</body>
+</html>

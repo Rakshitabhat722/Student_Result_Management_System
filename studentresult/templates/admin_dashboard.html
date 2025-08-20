@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .btn-primary {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: center;
+        }
+
+        a.action-link {
+            margin-right: 10px;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h2, h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome Admin {{ session['username'] }}</h2>
+        <h3>All Students and Their Marks</h3>
+
+        <!-- Add Student Button -->
+        <a href="{{ url_for('add_student') }}" class="btn-primary">➕ Add New Student</a>
+
+        <!-- Student Table -->
+        <table border="1" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>USN</th>
+                    <th>Branch</th>
+                    <th>Semester</th>
+                    <th>Subject</th>
+                    <th>Marks</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.username }}</td>
+                    <td>{{ student.usn }}</td>
+                    <td>{{ student.branch }}</td>
+                    <td>{{ student.semester }}</td>
+                    <td>{{ student.subject if student.subject else 'No Subject Yet' }}</td>
+                    <td>{{ student.marks if student.marks else 'No Marks Yet' }}</td>
+                    <td>
+                        {% if student.subject %}
+                            <a href="{{ url_for('edit_marks', user_id=student.user_id, subject=student.subject) }}" class="action-link">✏️ Edit</a>
+                        {% endif %}
+                        <a href="{{ url_for('add_marks', user_id=student.user_id) }}" class="action-link">➕ Add Marks</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <br>
+        <a href="{{ url_for('logout') }}">🚪 Logout</a>
+    </div>
+</body>
+</html>

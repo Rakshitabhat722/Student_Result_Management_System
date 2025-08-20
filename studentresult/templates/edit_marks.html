@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Edit Marks - {{ student.username }}</title>
+</head>
+<body>
+    <h1>Edit Marks for {{ student.username }} ({{ student.usn }})</h1>
+    <form method="POST">
+        <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody id="marks_table">
+                {% for mark in marks %}
+                <tr>
+                    <td><input type="text" name="subject" value="{{ mark.subject }}" required /></td>
+                    <td><input type="number" name="marks" value="{{ mark.marks }}" required min="0" max="100" /></td>
+                </tr>
+                {% endfor %}
+                <!-- Empty row for new entry -->
+                <tr>
+                    <td><input type="text" name="subject" placeholder="New subject" /></td>
+                    <td><input type="number" name="marks" placeholder="Marks" min="0" max="100" /></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" onclick="addRow()">Add another subject</button>
+        <br /><br />
+        <button type="submit">Save Marks</button>
+    </form>
+    <br />
+    <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+
+    <script>
+        function addRow() {
+            const table = document.getElementById('marks_table');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td><input type="text" name="subject" placeholder="New subject" required /></td>
+                <td><input type="number" name="marks" placeholder="Marks" min="0" max="100" required /></td>
+            `;
+            table.appendChild(newRow);
+        }
+    </script>
+</body>
+</html>

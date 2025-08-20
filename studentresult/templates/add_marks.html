@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Marks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Add Marks for Student ID: {{ user_id }}</h2>
+
+        <form action="{{ url_for('add_marks', user_id=user_id) }}" method="post">
+            <label for="subject">Subject:</label>
+            <input type="text" name="subject" required><br><br>
+
+            <label for="marks">Marks:</label>
+            <input type="number" name="marks" required><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <br>
+        <a href="{{ url_for('admin_dashboard') }}">← Back to Dashboard</a>
+    </div>
+</body>
+</html>
